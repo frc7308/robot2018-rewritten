@@ -3,18 +3,21 @@ package frc.team7308.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Compressor;
 
-import frc.team7308.robot.Drivetrain;
+import frc.team7308.robot.subsystems.Drivetrain;
+import frc.team7308.robot.subsystems.Lift;
 import frc.team7308.robot.DriverStation;
 
 public class Robot extends IterativeRobot {
     private Drivetrain drivetrain;
+    private Lift lift;
     private DriverStation driverStation;
     private Compressor compressor;
 
     @Override
     public void robotInit() {
-        this.drivetrain = new Drivetrain(0, 1, 2, 3);
-        this.driverStation = new DriverStation(0, 1);
+        this.drivetrain = new Drivetrain();
+        this.driverStation = new DriverStation();
+        this.lift = new Lift();
         this.compressor = new Compressor();
         compressor.start();
     }

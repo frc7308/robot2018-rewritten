@@ -7,15 +7,21 @@ import frc.team7308.robot.Constants;
 
 public class ControlLoop {
     private Timer loopTimer;
+    public long deltaTime;
 
     public void start() {
         class LoopTask extends TimerTask {
+            private long prevTime;
+
             public void run() {
+                long currTime = System.nanoTime() * 1000000;
+                ControlLoop.this.deltaTime = currTime - prevTime;
+                prevTime = currTime;
                 ControlLoop.this.loopPeriodic();
             }
         }
 
-        this.loopInit();
+        loopInit();
 
         loopTimer = new Timer();
         loopTimer.schedule(new LoopTask(), 0, Constants.kControlLoopInterval);

@@ -1,13 +1,13 @@
-package frc.team7308.robot;
+package frc.team7308.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.team7308.robot.ControlLoop;
 import frc.team7308.robot.DriverStation;
+import frc.team7308.robot.subsystems.Subsystem;
 
-public class Drivetrain {
+public class Drivetrain extends Subsystem {
     private SpeedControllerGroup left;
     private SpeedControllerGroup right;
     private double leftSpeed;
@@ -28,23 +28,18 @@ public class Drivetrain {
 
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
-        public void loopInit() {
-            System.out.println("test");
-        }
-        @Override
         public void loopPeriodic() {
-            //ArcadeDrive(DriverStation.driveThrottle, DriverStation.driveRotation);
             WheelDrive(DriverStation.driveThrottle, DriverStation.driveRotation, DriverStation.quickTurn);
             left.set(leftSpeed);
             right.set(rightSpeed);
         }
     };
 
-    public Drivetrain(int frontLeftPort, int backLeftPort, int frontRightPort, int backRightPort) {
-        Spark frontLeft = new Spark(frontLeftPort);
-        Spark backLeft = new Spark(backLeftPort);
-        Spark frontRight = new Spark(frontRightPort);
-        Spark backRight = new Spark(backRightPort);
+    public Drivetrain() {
+        Spark frontLeft = new Spark(0);
+        Spark backLeft = new Spark(1);
+        Spark frontRight = new Spark(2);
+        Spark backRight = new Spark(3);
 
         this.left = new SpeedControllerGroup(frontLeft, backLeft);
         this.right = new SpeedControllerGroup(frontRight, backRight);
@@ -63,8 +58,8 @@ public class Drivetrain {
     }
 
     public void WheelDrive(double throttle, double rotation, boolean quickTurn) {
-        double xSpeed = handleDeadband(throttle, kStickDeadband);
-        double zRotation = handleDeadband(rotation, kWheelDeadband);
+        double xSpeed = applyDeadzone(throttle, kStickDeadband);
+        double zRotation = applyDeadzone(rotation, kWheelDeadband);
 
         double angularPower;
         boolean overPower;
@@ -120,7 +115,7 @@ public class Drivetrain {
         rightSpeed = rightMotorOutput * 1.0 * m_rightSideInvertMultiplier;
     }
 
-        public double handleDeadband(double val, double deadband) {
-            return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
-        }
+    public double applyDeadzone(double val, double deadband) {
+        return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
+    }
 }

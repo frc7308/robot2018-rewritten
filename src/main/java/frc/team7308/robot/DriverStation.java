@@ -28,9 +28,9 @@ public class DriverStation {
         }
     };
 
-    public DriverStation(int driveStickPort, int driveWheelPort) {
-        this.driveStick = new Joystick(driveStickPort);
-        this.driveWheel = new Joystick(driveWheelPort);
+    public DriverStation() {
+        this.driveStick = new Joystick(0);
+        this.driveWheel = new Joystick(1);
         this.quickTurnTrigger = new JoystickButton(this.driveWheel, 1);
 
         this.driveWheel.setYChannel(0);
