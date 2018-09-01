@@ -1,4 +1,4 @@
-package frc.team7308.utils;
+package frc.team7308.robot.util;
 
 public class Vector2D {
     public float x;
@@ -14,29 +14,29 @@ public class Vector2D {
     public Vector2D(float magnitude, float angle, boolean magAngle) {
         if (magAngle) {
             this.magnitude = magnitude;
-            this.x = Math.cos(angle) * magnitude;
-            this.y = Math.sin(angle) * magnitude;
+            this.x = (float) (Math.cos(angle) * magnitude);
+            this.y = (float) (Math.sin(angle) * magnitude);
         } else {
-            this(magnitude, angle);
+            this(magnitude,angle);
         }
     }
 
-    public add(Vector2D other) {
+    public void add(Vector2D other) {
         this.x += other.x;
         this.y += other.y;
         this.calculateMagnitude();
     }
 
-    public setAngle(float angle) {
+    public void setAngle(float angle) {
         
     }
 
-    public zero() {
+    public void zero() {
         this.x = magnitude;
-        this.y = 0.0;
+        this.y = 0.0f;
     }
 
-    private calculateMagnitude() {
-        this.magnitude = Math.sqrt(this.x * this.x + this.y * this.y);
+    private void calculateMagnitude() {
+        this.magnitude = (float) (Math.sqrt(this.x * this.x + this.y * this.y));
     }
 }
