@@ -6,14 +6,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team7308.robot.ControlLoop;
 
 public class DriverStation {
-    public static double driveThrottle;
+    public static double driveMovement;
     public static double driveRotation;
-    public static boolean quickTurn;
+    public static boolean releaseCube;
 
-    private Joystick driveStick;
-    private Joystick driveWheel;
-    
-    private JoystickButton quickTurnTrigger;
+    private Joystick driveMovementStick;
+    private Joystick driveMovementRotationStick;
+    private JoystickButton releaseTrigger;
 
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
@@ -24,16 +23,14 @@ public class DriverStation {
         public void loopPeriodic() {
             driveThrottle = driveStick.getY();
             driveRotation = driveWheel.getY();
-            quickTurn = quickTurnTrigger.get();
+            releaseCube = releaseTrigger.get();
         }
     };
 
     public DriverStation() {
-        this.driveStick = new Joystick(0);
-        this.driveWheel = new Joystick(1);
-        this.quickTurnTrigger = new JoystickButton(this.driveWheel, 1);
-
-        this.driveWheel.setYChannel(0);
+        this.driveMovementStick = new Joystick(1);
+        this.driveMovementRotationStick = new Joystick(0);
+        this.releaseTrigger = new JoystickButton(this.driveMovementStick, 1);
 
         controlLoop.start();
     }
