@@ -1,4 +1,4 @@
-﻿package frc.team7308.robot.subsystems;
+package frc.team7308.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
@@ -12,6 +12,8 @@ public class Drivetrain extends Subsystem {
     private SpeedControllerGroup right;
     private double leftSpeed;
     private double rightSpeed;
+
+    private DriverStation driverStation;
 
     private static double mQuickStopAccumulator;
     private static final double kStickDeadband = 0.02;
@@ -29,7 +31,7 @@ public class Drivetrain extends Subsystem {
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
-            WheelDrive(DriverStation.driveThrottle, DriverStation.driveRotation, DriverStation.quickTurn);
+            WheelDrive(driverStation.getThrottle(), driverStation.getRotation(), driverStation.getQuickTurn());
             left.set(leftSpeed);
             right.set(rightSpeed);
         }
@@ -43,6 +45,8 @@ public class Drivetrain extends Subsystem {
 
         this.left = new SpeedControllerGroup(frontLeft, backLeft);
         this.right = new SpeedControllerGroup(frontRight, backRight);
+
+        this.driverStation = DriverStation.getInstance();
 
         controlLoop.start();
     }

@@ -15,8 +15,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
+        this.driverStation = DriverStation.getInstance();
         this.drivetrain = new Drivetrain();
-        this.driverStation = new DriverStation();
         this.lift = new Lift();
         this.compressor = new Compressor();
         compressor.start();

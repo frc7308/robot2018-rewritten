@@ -17,7 +17,9 @@ public class Vector2D {
             this.x = (float) (Math.cos(angle) * magnitude);
             this.y = (float) (Math.sin(angle) * magnitude);
         } else {
-            this(magnitude,angle);
+            this.x = x;
+            this.y = y;
+            this.calculateMagnitude();
         }
     }
 
