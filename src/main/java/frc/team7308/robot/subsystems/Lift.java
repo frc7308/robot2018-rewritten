@@ -44,9 +44,9 @@ public class Lift extends Subsystem {
                 m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
             }else {
                 m_liftSpeed = driverStation.getLiftThrottle();
-            }
-            m_lift.set(0);
-            //System.out.println(driverStation.getLiftThrottle());*/
+            }*/
+            //m_lift.set(driverStation.getLiftThrottle());
+            //System.out.println(driverStation.getLiftThrottle());
         }
     };
 

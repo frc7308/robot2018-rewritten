@@ -21,12 +21,12 @@ public class Claw extends Subsystem{
         @Override
         public void loopPeriodic() {
             actuateClaw(driverStation.getOpenClaw());
-            setSliderPosition(driverStation.getClawSliderOut(), driveStation.getClawSliderIn());
+            setSliderPosition(driverStation.getClawSliderOut(), driverStation.getClawSliderIn());
             actuateEjector(driverStation.getEjectorTrigger());
-            if(m_ejectorOut){
+            if (m_ejectorOut) {
                 m_totalTime += deltaTime;
-                System.out.println(m_totalTime);
             }
+            System.out.println(m_totalTime);
         }
     };
 
@@ -43,25 +43,23 @@ public class Claw extends Subsystem{
     }
 
     public void actuateClaw(boolean openClaw){
-        if(openClaw) {
-            clawActuator.set(DoubleSolenoid.Value.kForward);
-        } else{
-            clawActuator.set(DoubleSolenoid.Value.kReverse);
+        if (openClaw) {
+            m_clawActuator.set(DoubleSolenoid.Value.kForward);
+        } else {
+            m_clawActuator.set(DoubleSolenoid.Value.kReverse);
         }
     }
     public void setSliderPosition(boolean sliderOut, boolean sliderIn){
-        if(sliderOut){
-            clawSlider.set(DoubleSolenoid.Value.kForward);
-        }else if(sliderIn){
-            clawSlider.set(DoubleSolenoid.Value.kReverse);
+        if (sliderOut) {
+            m_clawSlider.set(DoubleSolenoid.Value.kForward);
+        } else if (sliderIn) {
+            m_clawSlider.set(DoubleSolenoid.Value.kReverse);
         }
     }
-    public void actuateEjector(boolean ejectorOut){
-        if(ejectorOut&&!ejectorOut){
-            boxEjector.set(DoubleSolenoid.Value.kForward);
-            ejectorOut = true;
-
-
+    public void actuateEjector(boolean ejectorOut) {
+        if (ejectorOut && !m_ejectorOut) {
+            m_boxEjector.set(DoubleSolenoid.Value.kForward);
+            m_ejectorOut = true;
         }
     }
 }
