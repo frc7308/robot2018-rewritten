@@ -7,14 +7,14 @@ import frc.team7308.robot.Constants;
 
 public class ControlLoop {
     private Timer loopTimer;
-    public long deltaTime;
+    public double deltaTime;
 
     public void start() {
         class LoopTask extends TimerTask {
-            private long prevTime;
+            private double prevTime;
 
             public void run() {
-                long currTime = System.nanoTime() * 1000000;
+                double currTime = System.nanoTime() / 1000000.0;
                 ControlLoop.this.deltaTime = currTime - prevTime;
                 prevTime = currTime;
                 ControlLoop.this.loopPeriodic();

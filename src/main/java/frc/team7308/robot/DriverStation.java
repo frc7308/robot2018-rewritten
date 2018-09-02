@@ -18,11 +18,14 @@ public class DriverStation {
     private Joystick throttleStick;
     private Joystick rotationWheel;
     private JoystickButton quickTurnTrigger;
+    private Joystick liftThrottle;
 
     public DriverStation() {
         this.throttleStick = new Joystick(1);
         this.rotationWheel = new Joystick(0);
-        this.quickTurnTrigger = new JoystickButton(this.throttleStick, 1);
+        this.quickTurnTrigger = new JoystickButton(this.rotationWheel, 1);
+
+        this.liftThrottle = new Joystick(3);
     }
 
     public double getThrottle() {
@@ -30,10 +33,14 @@ public class DriverStation {
     }
 
     public double getRotation() {
-        return rotationWheel.getY();
+        return rotationWheel.getX();
     }
 
     public boolean getQuickTurn() {
         return quickTurnTrigger.get();
+    }
+
+    public double getLiftThrottle() {
+        return liftThrottle.getY();
     }
 }
