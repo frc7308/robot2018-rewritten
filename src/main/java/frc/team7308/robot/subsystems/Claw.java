@@ -33,7 +33,7 @@ public class Claw extends Subsystem{
                 }
             }
             if(!m_sliderOut) {
-                private int m_totalTime2 += deltaTime;
+                m_totalTime2 += deltaTime;
                 if(m_totalTime2==500){
                     m_sliderOut = true;
                 }
@@ -46,7 +46,8 @@ public class Claw extends Subsystem{
         m_clawSlider = new DoubleSolenoid(2, 3);
         m_clawActuator = new DoubleSolenoid(4, 5);
         m_ejectorOut = false;
-        m_totalTime = 0;
+        m_totalTime1 = 0;
+        m_totalTime2 = 0;
 
         this.driverStation = DriverStation.getInstance();
 
