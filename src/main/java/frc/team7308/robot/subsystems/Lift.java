@@ -21,27 +21,32 @@ public class Lift extends Subsystem {
     private double prev_err;
     private double integralGain = 0.0;
 
-    private int goal_height;
+    private int goal_height = 1000;
 
     private int kMinHeight = 0;
     private int kMaxHeight = 3600;
 
     private int kAcceptableError = 5; // In encoder pulses
 
+    private boolean positionMode = true;
+
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
-            double error = goal_height - encoder.get();
-            if (Math.abs(error) < kAcceptableError) {
-                integralGain = 0;
-            } else {
-                integralGain += (error * deltaTime * 0.001);
+            /*if (positionMode) {
+                double error = goal_height - m_encoder.get();
+                if (Math.abs(error) < kAcceptableError) {
+                    integralGain = 0;
+                } else {
+                    integralGain += (error * deltaTime * 0.001);
+                }
+                double derivativeGain = (error - prev_err) / deltaTime;
+                m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
+            }else {
+                m_liftSpeed = driverStation.getLiftThrottle();
             }
-            double derivativeGain = (error - prev_err) / deltaTime;
-            m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
-
-            m_lift.set(m_liftSpeed);
-            System.out.println(m_liftSpeed);
+            m_lift.set(0);
+            //System.out.println(driverStation.getLiftThrottle());*/
         }
     };
 

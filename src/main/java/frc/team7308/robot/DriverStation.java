@@ -31,11 +31,12 @@ public class DriverStation {
         this.rotationWheel = new Joystick(0);
         this.quickTurnTrigger = new JoystickButton(this.rotationWheel, 1);
         this.liftStick = new Joystick(3);
-        this.clawSliderIn = new JoystickButton(this.buttonBoard, 0);
+        this.buttonBoard = new Joystick(2);
         this.clawSliderIn = new JoystickButton(this.buttonBoard, 1);
-        this.throwBox = new JoystickButton(this.buttonBoard, 2);
-        this.openClaw = new JoystickButton(this.buttonBoard, 3);
-        this.autoAlign = new JoystickButton(this.buttonBoard, 4);
+        this.clawSliderOut = new JoystickButton(this.buttonBoard, 2);
+        this.throwBox = new JoystickButton(this.buttonBoard, 3);
+        this.openClaw = new JoystickButton(this.buttonBoard, 4);
+        this.autoAlign = new JoystickButton(this.buttonBoard, 5);
     }
 
     public double getThrottle() {
@@ -54,5 +55,7 @@ public class DriverStation {
         return liftStick.getY();
     }
 
-    public boolean getOpenClaw() { return openClaw.get(); }
+    public boolean getOpenClaw() {
+        return openClaw.get();
+    }
 }
