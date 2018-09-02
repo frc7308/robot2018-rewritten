@@ -34,7 +34,6 @@ public class Claw extends Subsystem{
             }
             if(!m_sliderOut) {
                 private int m_totalTime2 += deltaTime;
-                System.out.print(m_totalTime2);
                 if(m_totalTime2==500){
                     m_sliderOut = true;
                 }
