@@ -45,8 +45,9 @@ public class Lift extends Subsystem {
             }else {
                 m_liftSpeed = driverStation.getLiftThrottle();
             }*/
-            //m_lift.set(driverStation.getLiftThrottle());
-            //System.out.println(driverStation.getLiftThrottle());
+            m_lift.set(driverStation.getLiftThrottle());
+            System.out.println(driverStation.getLiftThrottle());
+            //m_lift.set(0.2);
         }
     };
 
@@ -57,6 +58,8 @@ public class Lift extends Subsystem {
         this.m_lift = new SpeedControllerGroup(leftMotor, middleMotor, rightMotor);
 
         this.m_encoder = new Encoder(0, 1);
+
+        this.driverStation = DriverStation.getInstance();
 
         controlLoop.start();
     }
