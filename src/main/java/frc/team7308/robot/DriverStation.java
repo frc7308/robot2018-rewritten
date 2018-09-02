@@ -58,4 +58,24 @@ public class DriverStation {
     public boolean getOpenClaw() {
         return openClaw.get();
     }
+
+    public boolean getClawSliderIn() {
+        return clawSliderIn.get();
+    }
+
+    public boolean getClawSliderOut(){
+        return clawSliderOut.get();
+    }
+
+    public boolean throwBox(){
+        return throwBox.get();
+    }
+
+    public boolean autoAlign(){
+        return autoAlign.get();
+    }
+
+    public boolean getEjectorTrigger(){
+        return liftStick.getTrigger();
+    }
 }

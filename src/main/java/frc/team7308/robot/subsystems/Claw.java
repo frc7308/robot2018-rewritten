@@ -7,9 +7,13 @@ import frc.team7308.robot.DriverStation;
 import frc.team7308.robot.subsystems.Subsystem;
 
 public class Claw extends Subsystem{
-    DoubleSolenoid boxEjector;
-    DoubleSolenoid clawSlider;
-    DoubleSolenoid clawActuator;
+    private DoubleSolenoid m_boxEjector;
+    private DoubleSolenoid m_clawSlider;
+    private DoubleSolenoid m_clawActuator;
+
+    private boolean m_ejectorOut;
+
+    private int m_totalTime;
 
     private DriverStation driverStation;
 
@@ -17,15 +21,21 @@ public class Claw extends Subsystem{
         @Override
         public void loopPeriodic() {
             actuateClaw(driverStation.getOpenClaw());
-            /*actuateSlider(false, false);
-            actuateEjector(false);*/
+            setSliderPosition(driverStation.getClawSliderOut(), driveStation.getClawSliderIn());
+            actuateEjector(driverStation.getEjectorTrigger());
+            if(m_ejectorOut){
+                m_totalTime += deltaTime;
+                System.out.println(m_totalTime);
+            }
         }
     };
 
     public Claw(){
-        boxEjector = new DoubleSolenoid(0, 1);
-        clawSlider = new DoubleSolenoid(2, 3);
-        clawActuator = new DoubleSolenoid(4,5);
+        m_boxEjector = new DoubleSolenoid(0, 1);
+        m_clawSlider = new DoubleSolenoid(2, 3);
+        m_clawActuator = new DoubleSolenoid(4, 5);
+        m_ejectorOut = false;
+        m_totalTime = 0;
 
         this.driverStation = DriverStation.getInstance();
 
@@ -33,14 +43,13 @@ public class Claw extends Subsystem{
     }
 
     public void actuateClaw(boolean openClaw){
-        System.out.println("hi");
         if(openClaw) {
             clawActuator.set(DoubleSolenoid.Value.kForward);
         } else{
             clawActuator.set(DoubleSolenoid.Value.kReverse);
         }
     }
-    /*public void actuateSlider(boolean sliderOut, boolean sliderIn){
+    public void setSliderPosition(boolean sliderOut, boolean sliderIn){
         if(sliderOut){
             clawSlider.set(DoubleSolenoid.Value.kForward);
         }else if(sliderIn){
@@ -48,8 +57,11 @@ public class Claw extends Subsystem{
         }
     }
     public void actuateEjector(boolean ejectorOut){
-        if(ejectorOut){
+        if(ejectorOut&&!ejectorOut){
+            boxEjector.set(DoubleSolenoid.Value.kForward);
+            ejectorOut = true;
+
 
         }
-    }*/
+    }
 }
