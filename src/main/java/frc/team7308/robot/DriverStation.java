@@ -18,7 +18,9 @@ public class DriverStation {
     private Joystick throttleStick;
     private Joystick rotationWheel;
     private JoystickButton quickTurnTrigger;
+
     private Joystick liftStick;
+    
     private Joystick buttonBoard;
     private JoystickButton clawSliderIn;
     private JoystickButton clawSliderOut;

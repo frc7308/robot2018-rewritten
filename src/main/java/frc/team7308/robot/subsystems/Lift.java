@@ -24,7 +24,7 @@ public class Lift extends Subsystem {
     private int goal_height = 1000;
 
     private int kMinHeight = 0;
-    private int kMaxHeight = 3600;
+    private int kMaxHeight = 3500;
 
     private int kAcceptableError = 5; // In encoder pulses
 
@@ -45,9 +45,14 @@ public class Lift extends Subsystem {
             }else {
                 m_liftSpeed = driverStation.getLiftThrottle();
             }*/
-            m_lift.set(driverStation.getLiftThrottle());
-            System.out.println(driverStation.getLiftThrottle());
-            //m_lift.set(0.2);
+            double throttle = driverStation.getLiftThrottle() * -1;
+            if (m_encoder.get() < -600) {
+                throttle = clamp(throttle, 0.0, 1.0);
+            }
+            if (m_encoder.get() > 3500) {
+                throttle = clamp(throttle, -1.0, 0.0);
+            }
+            m_lift.set(throttle);
         }
     };
 
@@ -67,5 +72,9 @@ public class Lift extends Subsystem {
     // Normalized coordinates
     public void setHeight(double height) {
         this.goal_height = (int)((kMaxHeight - kMinHeight) * height) + kMinHeight;
+    }
+
+    public static double clamp(double val, double min, double max) {
+        return Math.max(min, Math.min(max, val));
     }
 }
