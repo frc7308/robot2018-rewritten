@@ -5,11 +5,13 @@ import edu.wpi.first.wpilibj.Compressor;
 
 import frc.team7308.robot.subsystems.Drivetrain;
 import frc.team7308.robot.subsystems.Lift;
+import frc.team7308.robot.subsystems.Claw;
 import frc.team7308.robot.DriverStation;
 
 public class Robot extends IterativeRobot {
     private Drivetrain drivetrain;
     private Lift lift;
+    private Claw claw;
     private DriverStation driverStation;
     private Compressor compressor;
 
@@ -18,6 +20,7 @@ public class Robot extends IterativeRobot {
         this.driverStation = DriverStation.getInstance();
         this.drivetrain = new Drivetrain();
         this.lift = new Lift();
+        this.claw = new Claw();
         this.compressor = new Compressor();
         compressor.start();
     }

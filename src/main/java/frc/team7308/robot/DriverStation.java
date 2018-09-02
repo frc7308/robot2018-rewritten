@@ -18,14 +18,24 @@ public class DriverStation {
     private Joystick throttleStick;
     private Joystick rotationWheel;
     private JoystickButton quickTurnTrigger;
-    private Joystick liftThrottle;
+    private Joystick liftStick;
+    private Joystick buttonBoard;
+    private JoystickButton clawSliderIn;
+    private JoystickButton clawSliderOut;
+    private JoystickButton throwBox;
+    private JoystickButton openClaw;
+    private JoystickButton autoAlign;
 
     public DriverStation() {
         this.throttleStick = new Joystick(1);
         this.rotationWheel = new Joystick(0);
         this.quickTurnTrigger = new JoystickButton(this.rotationWheel, 1);
-
-        this.liftThrottle = new Joystick(3);
+        this.liftStick = new Joystick(3);
+        this.clawSliderIn = new JoystickButton(this.buttonBoard, 0);
+        this.clawSliderIn = new JoystickButton(this.buttonBoard, 1);
+        this.throwBox = new JoystickButton(this.buttonBoard, 2);
+        this.openClaw = new JoystickButton(this.buttonBoard, 3);
+        this.autoAlign = new JoystickButton(this.buttonBoard, 4);
     }
 
     public double getThrottle() {
@@ -43,4 +53,6 @@ public class DriverStation {
     public double getLiftThrottle() {
         return liftStick.getY();
     }
+
+    public boolean getOpenClaw() { return openClaw.get(); }
 }
