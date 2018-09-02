@@ -69,7 +69,7 @@ public class DriverStation {
         return clawSliderOut.get();
     }
 
-    public boolean throwBox(){
+    public boolean getThrowBox(){
         return throwBox.get();
     }
 
