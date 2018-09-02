@@ -12,8 +12,10 @@ public class Claw extends Subsystem{
     private DoubleSolenoid m_clawActuator;
 
     private boolean m_ejectorOut;
+    private boolean m_sliderOut;
 
-    private int m_totalTime;
+    private int m_totalTime1;
+    private int m_totalTime2;
 
     private DriverStation driverStation;
 
@@ -24,9 +26,19 @@ public class Claw extends Subsystem{
             setSliderPosition(driverStation.getClawSliderOut(), driverStation.getClawSliderIn());
             actuateEjector(driverStation.getEjectorTrigger());
             if (m_ejectorOut) {
-                m_totalTime += deltaTime;
+                m_totalTime1 += deltaTime;
+                System.out.println(m_totalTime1);
+                if(m_totalTime1==300){
+                    m_ejectorOut = false;
+                }
             }
-            System.out.println(m_totalTime);
+            if(!m_sliderOut) {
+                private int m_totalTime2 += deltaTime;
+                System.out.print(m_totalTime2);
+                if(m_totalTime2==500){
+                    m_sliderOut = true;
+                }
+            }
         }
     };
 
