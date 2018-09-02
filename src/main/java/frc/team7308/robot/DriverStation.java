@@ -41,6 +41,6 @@ public class DriverStation {
     }
 
     public double getLiftThrottle() {
-        return liftThrottle.getY();
+        return liftStick.getY();
     }
 }
