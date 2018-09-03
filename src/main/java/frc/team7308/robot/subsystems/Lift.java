@@ -3,6 +3,7 @@ package frc.team7308.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.team7308.robot.ControlLoop;
 import frc.team7308.robot.DriverStation;
@@ -12,6 +13,7 @@ public class Lift extends Subsystem {
     private SpeedControllerGroup m_lift;
     private double m_liftSpeed;
     private Encoder m_encoder;
+    private DigitalInput zeroSensor;
 
     private DriverStation driverStation;
 
@@ -20,6 +22,8 @@ public class Lift extends Subsystem {
     private double kD = 0.0;
     private double prev_err;
     private double integralGain = 0.0;
+
+    private boolean zeroed;
 
     private int goal_height = 1000;
 
@@ -46,13 +50,18 @@ public class Lift extends Subsystem {
                 m_liftSpeed = driverStation.getLiftThrottle();
             }*/
             double throttle = driverStation.getLiftThrottle() * -1;
-            if (m_encoder.get() < -600) {
+            if (m_encoder.get() < -600 && zeroed) {
                 throttle = clamp(throttle, 0.0, 1.0);
             }
-            if (m_encoder.get() > 3500) {
+            if (m_encoder.get() > 3500 && zeroed) {
                 throttle = clamp(throttle, -1.0, 0.0);
             }
             m_lift.set(throttle);
+            if (!zeroSensor.get()) {
+                zeroed = true;
+                m_encoder.reset();
+            }
+            System.out.println(m_encoder.get());
         }
     };
 
@@ -63,6 +72,9 @@ public class Lift extends Subsystem {
         this.m_lift = new SpeedControllerGroup(leftMotor, middleMotor, rightMotor);
 
         this.m_encoder = new Encoder(0, 1);
+        this.zeroSensor = new DigitalInput(3);
+
+        zeroed =false;
 
         this.driverStation = DriverStation.getInstance();
 

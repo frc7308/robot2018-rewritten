@@ -25,7 +25,7 @@ public class Claw extends Subsystem{
             actuateClaw(driverStation.getOpenClaw());
             setSliderPosition(driverStation.getClawSliderOut(), driverStation.getClawSliderIn());
             actuateEjector(driverStation.getEjectorTrigger());
-            if (m_ejectorOut) {
+            /*if (m_ejectorOut) {
                 m_totalTime1 += deltaTime;
                 System.out.println(m_totalTime1);
                 if(m_totalTime1==300){
@@ -37,7 +37,7 @@ public class Claw extends Subsystem{
                 if(m_totalTime2==500){
                     m_sliderOut = true;
                 }
-            }
+            }*/
         }
     };
 
@@ -69,9 +69,11 @@ public class Claw extends Subsystem{
         }
     }
     public void actuateEjector(boolean ejectorOut) {
-        if (ejectorOut && !m_ejectorOut) {
+        if (ejectorOut) {
             m_boxEjector.set(DoubleSolenoid.Value.kForward);
             m_ejectorOut = true;
+        } else {
+            m_boxEjector.set(DoubleSolenoid.Value.kReverse);
         }
     }
 }
