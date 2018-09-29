@@ -87,18 +87,17 @@ public class Claw extends Subsystem{
         if (sliderOut) {
             m_clawSlider.set(DoubleSolenoid.Value.kForward);
             m_sliderOut = true;
-        } else if (sliderIn) {
+        } else if (sliderIn && m_encoderValue>200) {
             m_clawSlider.set(DoubleSolenoid.Value.kReverse);
             m_sliderOut = false;
         }
     }
-    public void setSliderPosition(boolean sliderOut, boolean sliderIn){
-        if (sliderOut) {
-            m_clawSlider.set(DoubleSolenoid.Value.kForward);
-            m_sliderOut = true;
-        } else if (sliderIn && m_encoderValue>200) {
-            m_clawSlider.set(DoubleSolenoid.Value.kReverse);
-            m_sliderOut = false;
+    public void actuateEjector(boolean ejectorOut) {
+        if (ejectorOut && !m_ejectorOut && m_sliderOut) {
+            m_boxEjector.set(DoubleSolenoid.Value.kForward);
+            m_ejectorOut = true;
+        } else {
+            m_boxEjector.set(DoubleSolenoid.Value.kReverse);
         }
     }
     public void throwCube(boolean throwBox){
