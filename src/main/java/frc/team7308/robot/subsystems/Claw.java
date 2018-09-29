@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.team7308.robot.ControlLoop;
 import frc.team7308.robot.DriverStation;
 import frc.team7308.robot.subsystems.Subsystem;
+import frc.team7308.robot.subsystems.Lift;
 
 public class Claw extends Subsystem{
     private DoubleSolenoid m_boxEjector;
@@ -18,8 +19,10 @@ public class Claw extends Subsystem{
     private int m_totalTime1;
     private int m_totalTime2;
     private int m_totalTime3;
+    private int m_encoderValue;
 
     private DriverStation driverStation;
+    private Lift lift;
 
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
@@ -41,22 +44,22 @@ public class Claw extends Subsystem{
                     m_totalTime2 = 0;
                 }
             }
-            if (m_clawOpenAndEject) {
-                m_totalTime3 += deltaTime;
-                System.out.println(m_totalTime3);
-                if(m_totalTime3 == 50) {
-                    m_totalTime3 = 0;
-                    System.out.println(m_totalTime3);
-                    m_boxEjector.set(DoubleSolenoid.Value.kForward);
-                }
-                // if (m_totalTime3 == 50) {
-                //     m_boxEjector.set(DoubleSolenoid.Value.kForward);
-                //     m_clawOpenAndEject = false;
-                //     m_boxEjector.set(DoubleSolenoid.Value.kReverse);
-                //     actuateClaw(false);
-                //     m_totalTime3 = 0;
-                // }
-            }
+//            if (m_clawOpenAndEject) {
+//                m_totalTime3 += deltaTime;
+//                System.out.println(m_totalTime3);
+//                if(m_totalTime3 == 50) {
+//                    m_totalTime3 = 0;
+//                    System.out.println(m_totalTime3);
+//                    m_boxEjector.set(DoubleSolenoid.Value.kForward);
+//                }
+//                // if (m_totalTime3 == 50) {
+//                //     m_boxEjector.set(DoubleSolenoid.Value.kForward);
+//                //     m_clawOpenAndEject = false;
+//                //     m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+//                //     actuateClaw(false);
+//                //     m_totalTime3 = 0;
+//                // }
+//            }
             System.out.println(m_totalTime1 + ", " + m_totalTime2 + ", " + m_totalTime3);
         }
     };
@@ -89,18 +92,26 @@ public class Claw extends Subsystem{
             m_sliderOut = false;
         }
     }
-    public void actuateEjector(boolean ejectorOut) {
-        if (ejectorOut && !m_ejectorOut && m_sliderOut) {
-            m_boxEjector.set(DoubleSolenoid.Value.kForward);
-            m_ejectorOut = true;
-        } else {
-            m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+    public void setSliderPosition(boolean sliderOut, boolean sliderIn){
+        if (sliderOut) {
+            m_clawSlider.set(DoubleSolenoid.Value.kForward);
+            m_sliderOut = true;
+        } else if (sliderIn && m_encoderValue>200) {
+            m_clawSlider.set(DoubleSolenoid.Value.kReverse);
+            m_sliderOut = false;
         }
     }
     public void throwCube(boolean throwBox){
         if(throwBox && m_sliderOut){
-            actuateClaw(true);
-            m_clawOpenAndEject = true;
+            m_clawActuator.set(DoubleSolenoid.Value.kForward);
+            m_boxEjector.set(DoubleSolenoid.Value.kForward);
         }
+        if(!throwBox && m_sliderOut){
+            m_clawActuator.set(DoubleSolenoid.Value.kReverse);
+            m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+        }
+    }
+    public boolean getSliderOut() {
+        return m_sliderOut;
     }
 }

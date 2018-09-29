@@ -85,4 +85,8 @@ public class Lift extends Subsystem {
     public static double clamp(double val, double min, double max) {
         return Math.max(min, Math.min(max, val));
     }
+
+    public int getEncoderValue() {
+        return m_encoder.get();
+    }
 }
