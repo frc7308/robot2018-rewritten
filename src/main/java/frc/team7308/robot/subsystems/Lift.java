@@ -30,7 +30,7 @@ public class Lift extends Subsystem {
     private int kMinHeight = 0;
     private int kMaxHeight = 3500;
 
-    private int kAcceptableError = 5; // In encoder pulses
+    public int kAcceptableError = 5; // In encoder pulses
 
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override

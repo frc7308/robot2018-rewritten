@@ -32,7 +32,9 @@ public class Drivetrain extends Subsystem {
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
-            WheelDrive(driverStation.getThrottle(), driverStation.getRotation(), driverStation.getQuickTurn());
+            if (gameState.equals("Teleop")) {
+                WheelDrive(driverStation.getThrottle(), driverStation.getRotation(), driverStation.getQuickTurn());
+            }
             left.set(leftSpeed);
             right.set(rightSpeed);
         }
