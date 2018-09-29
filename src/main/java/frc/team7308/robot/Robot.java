@@ -35,44 +35,21 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
-
+        loopMaster.setGameState("Disabled");
     }
-
-    @Override
-    public void disabledPeriodic() {
-        
-    }
-
 
     @Override
     public void autonomousInit() {
-        
+        loopMaster.setGameState("Autonomous");
     }
-
-    @Override
-    public void autonomousPeriodic() {
-        
-    }
-
 
     @Override
     public void teleopInit() {
-        
+         loopMaster.setGameState("Teleop");
     }
-
-    @Override
-    public void teleopPeriodic() {
-
-    }
-
 
     @Override
     public void testInit() {
-        
-    }
-
-    @Override
-    public void testPeriodic() {
-        
+         loopMaster.setGameState("Test");
     }
 }
