@@ -46,7 +46,6 @@ public class Lift extends Subsystem {
                 m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
             } else {
                 double throttle = driverStation.getLiftThrottle() * -1;
-                System.out.println(throttle);
                 if (m_encoder.get() < -600 && zeroed) {
                     throttle = clamp(throttle, 0.0, 1.0);
                 }
@@ -58,7 +57,6 @@ public class Lift extends Subsystem {
                     zeroed = true;
                     m_encoder.reset();
                 }
-                System.out.println("enc: " + m_encoder.get());
             }
         }
     };
@@ -82,7 +80,7 @@ public class Lift extends Subsystem {
         this.goal_height = (int)((kMaxHeight - kMinHeight) * height) + kMinHeight;
     }
 
-    public static double clamp(double val, double min, double max) {
+    private static double clamp(double val, double min, double max) {
         return Math.max(min, Math.min(max, val));
     }
 }

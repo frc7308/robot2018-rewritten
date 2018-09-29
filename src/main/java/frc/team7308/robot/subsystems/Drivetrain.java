@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Spark;
 import frc.team7308.robot.ControlLoop;
 import frc.team7308.robot.DriverStation;
 import frc.team7308.robot.subsystems.Subsystem;
+import frc.team7308.robot.subsystems.Lift;
 
 public class Drivetrain extends Subsystem {
     private SpeedControllerGroup left;
@@ -106,6 +107,13 @@ public class Drivetrain extends Subsystem {
             }
         }
 
+        if (Lift.m_encoder.get() >= 611) {
+            double speedLimit = (550.0 / Lift.m_encoder.get()) + 0.1;
+            leftMotorOutput = clamp(leftMotorOutput, -speedLimit, speedLimit);
+            rightMotorOutput = clamp(rightMotorOutput, -speedLimit, speedLimit);
+            System.out.println(speedLimit);
+        }
+
         // Normalize the wheel speeds
         double maxMagnitude = Math.max(Math.abs(leftMotorOutput), Math.abs(rightMotorOutput));
         if (maxMagnitude > 1.0) {
@@ -113,11 +121,15 @@ public class Drivetrain extends Subsystem {
             rightMotorOutput /= maxMagnitude;
         }
 
-        leftSpeed = leftMotorOutput * 1.0;
-        rightSpeed = rightMotorOutput * 1.0 * m_rightSideInvertMultiplier;
+        leftSpeed = leftMotorOutput;
+        rightSpeed = rightMotorOutput * m_rightSideInvertMultiplier;
     }
 
     public double applyDeadzone(double val, double deadband) {
         return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
+    }
+
+    private static double clamp(double val, double min, double max) {
+        return Math.max(min, Math.min(max, val));
     }
 }
