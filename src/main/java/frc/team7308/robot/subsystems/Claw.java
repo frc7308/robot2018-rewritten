@@ -12,7 +12,7 @@ public class Claw extends Subsystem{
     private DoubleSolenoid m_clawSlider;
     private DoubleSolenoid m_clawActuator;
 
-    private boolean m_sliderOut;
+    public static boolean m_sliderOut;
     private boolean m_clawOpen;
     private boolean m_ejectorOut;
 

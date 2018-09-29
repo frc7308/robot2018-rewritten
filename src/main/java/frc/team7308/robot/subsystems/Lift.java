@@ -52,6 +52,9 @@ public class Lift extends Subsystem {
                 if (m_encoder.get() > 3500 && zeroed) {
                     throttle = clamp(throttle, -1.0, 0.0);
                 }
+                if (m_encoder.get() <= 200 && zeroed && !Claw.m_sliderOut) {
+                    throttle = clamp(throttle, 0.0, 1.0);
+                }
                 m_lift.set(throttle);
                 if (!zeroSensor.get()) {
                     zeroed = true;
