@@ -9,14 +9,10 @@ import frc.team7308.robot.Constants;
 import frc.team7308.robot.ControlLoop;
 
 public class LoopMaster {
-    public ArrayList<ControlLoop> loopList;
+    public ArrayList<ControlLoop> loopList = new ArrayList<ControlLoop>();;
 
     private Timer loopTimer;
     private String gameState = "Disabled";
-
-    public LoopMaster(ControlLoop ...loops) {
-        loopList.addAll(Arrays.asList(loops));
-    }
 
     public void addLoop(ControlLoop loop) {
         loopList.add(loop);

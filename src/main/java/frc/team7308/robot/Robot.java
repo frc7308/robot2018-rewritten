@@ -25,7 +25,10 @@ public class Robot extends IterativeRobot {
         this.lift = new Lift();
         this.claw = new Claw();
 
-        this.loopMaster = new LoopMaster(drivetrain.controlLoop, lift.controlLoop, claw.controlLoop);
+        this.loopMaster = new LoopMaster();
+        loopMaster.addLoop(drivetrain.controlLoop);
+        loopMaster.addLoop(lift.controlLoop);
+        loopMaster.addLoop(claw.controlLoop);
         loopMaster.start();
 
         this.compressor = new Compressor();

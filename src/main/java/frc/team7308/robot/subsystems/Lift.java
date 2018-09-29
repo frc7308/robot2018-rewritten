@@ -12,7 +12,7 @@ import frc.team7308.robot.subsystems.Subsystem;
 public class Lift extends Subsystem {
     private SpeedControllerGroup m_lift;
     private double m_liftSpeed;
-    private Encoder m_encoder;
+    public static Encoder m_encoder;
     private DigitalInput zeroSensor;
 
     private DriverStation driverStation;
@@ -84,9 +84,5 @@ public class Lift extends Subsystem {
 
     public static double clamp(double val, double min, double max) {
         return Math.max(min, Math.min(max, val));
-    }
-
-    public int getEncoderValue() {
-        return m_encoder.get();
     }
 }
