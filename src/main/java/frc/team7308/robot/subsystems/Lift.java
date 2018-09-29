@@ -50,6 +50,7 @@ public class Lift extends Subsystem {
                 m_liftSpeed = driverStation.getLiftThrottle();
             }*/
             double throttle = driverStation.getLiftThrottle() * -1;
+            System.out.println(throttle);
             if (m_encoder.get() < -600 && zeroed) {
                 throttle = clamp(throttle, 0.0, 1.0);
             }
@@ -61,7 +62,7 @@ public class Lift extends Subsystem {
                 zeroed = true;
                 m_encoder.reset();
             }
-            System.out.println(m_encoder.get());
+            System.out.println("enc: " + m_encoder.get());
         }
     };
 

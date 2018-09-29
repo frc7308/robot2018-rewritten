@@ -36,22 +36,28 @@ public class Claw extends Subsystem{
             }
             if(!m_sliderOut) {
                 m_totalTime2 += deltaTime;
-                if(m_totalTime2==500){
+                if (m_totalTime2 == 500) {
                     m_sliderOut = true;
                     m_totalTime2 = 0;
                 }
             }
-            if(m_clawOpenAndEject){
+            if (m_clawOpenAndEject) {
                 m_totalTime3 += deltaTime;
-                if(m_totalTime3==50){
-                    m_boxEjector.set(DoubleSolenoid.Value.kForward);
-                    m_clawOpenAndEject = false;
-                    m_boxEjector.set(DoubleSolenoid.Value.kReverse);
-                    actuateClaw(false);
+                System.out.println(m_totalTime3);
+                if(m_totalTime3 == 50) {
                     m_totalTime3 = 0;
+                    System.out.println(m_totalTime3);
+                    m_boxEjector.set(DoubleSolenoid.Value.kForward);
                 }
+                // if (m_totalTime3 == 50) {
+                //     m_boxEjector.set(DoubleSolenoid.Value.kForward);
+                //     m_clawOpenAndEject = false;
+                //     m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+                //     actuateClaw(false);
+                //     m_totalTime3 = 0;
+                // }
             }
-            System.out.println(m_totalTime1+", "+m_totalTime2+", "+m_totalTime3);
+            System.out.println(m_totalTime1 + ", " + m_totalTime2 + ", " + m_totalTime3);
         }
     };
 
@@ -86,11 +92,7 @@ public class Claw extends Subsystem{
         }
     }
     public void actuateEjector(boolean ejectorOut) {
-<<<<<<< HEAD
-        if (ejectorOut) {
-=======
         if (ejectorOut && !m_ejectorOut && m_sliderOut) {
->>>>>>> 5f4d49aeccb84ca48df9c3d4a60115879b04a420
             m_boxEjector.set(DoubleSolenoid.Value.kForward);
             m_ejectorOut = true;
         } else {

@@ -58,7 +58,7 @@ public class DriverStation {
     }
 
     public boolean getOpenClaw() {
-        return openClaw.get();
+        return openClaw.get() || throttleStick.getTrigger();
     }
 
     public boolean getClawSliderIn() {
