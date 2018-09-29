@@ -32,12 +32,10 @@ public class Lift extends Subsystem {
 
     private int kAcceptableError = 5; // In encoder pulses
 
-    private boolean positionMode = true;
-
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
-            /*if (positionMode) {
+            if (gameState.equals("Autonomous")) {
                 double error = goal_height - m_encoder.get();
                 if (Math.abs(error) < kAcceptableError) {
                     integralGain = 0;
@@ -46,23 +44,22 @@ public class Lift extends Subsystem {
                 }
                 double derivativeGain = (error - prev_err) / deltaTime;
                 m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
-            }else {
-                m_liftSpeed = driverStation.getLiftThrottle();
-            }*/
-            double throttle = driverStation.getLiftThrottle() * -1;
-            System.out.println(throttle);
-            if (m_encoder.get() < -600 && zeroed) {
-                throttle = clamp(throttle, 0.0, 1.0);
+            } else {
+                double throttle = driverStation.getLiftThrottle() * -1;
+                System.out.println(throttle);
+                if (m_encoder.get() < -600 && zeroed) {
+                    throttle = clamp(throttle, 0.0, 1.0);
+                }
+                if (m_encoder.get() > 3500 && zeroed) {
+                    throttle = clamp(throttle, -1.0, 0.0);
+                }
+                m_lift.set(throttle);
+                if (!zeroSensor.get()) {
+                    zeroed = true;
+                    m_encoder.reset();
+                }
+                System.out.println("enc: " + m_encoder.get());
             }
-            if (m_encoder.get() > 3500 && zeroed) {
-                throttle = clamp(throttle, -1.0, 0.0);
-            }
-            m_lift.set(throttle);
-            if (!zeroSensor.get()) {
-                zeroed = true;
-                m_encoder.reset();
-            }
-            System.out.println("enc: " + m_encoder.get());
         }
     };
 
@@ -75,11 +72,9 @@ public class Lift extends Subsystem {
         this.m_encoder = new Encoder(0, 1);
         this.zeroSensor = new DigitalInput(3);
 
-        zeroed =false;
+        zeroed = false;
 
         this.driverStation = DriverStation.getInstance();
-
-        controlLoop.start();
     }
 
     // Normalized coordinates

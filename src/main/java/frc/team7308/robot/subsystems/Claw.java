@@ -71,8 +71,6 @@ public class Claw extends Subsystem{
         m_totalTime3 = 0;
 
         this.driverStation = DriverStation.getInstance();
-
-        controlLoop.start();
     }
 
     public void actuateClaw(boolean openClaw){

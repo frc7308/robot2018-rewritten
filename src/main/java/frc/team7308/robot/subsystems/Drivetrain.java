@@ -47,8 +47,6 @@ public class Drivetrain extends Subsystem {
         this.right = new SpeedControllerGroup(frontRight, backRight);
 
         this.driverStation = DriverStation.getInstance();
-
-        controlLoop.start();
     }
 
     public void ArcadeDrive(double movement, double rotation) {
