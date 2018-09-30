@@ -1,5 +1,8 @@
 package frc.team7308.robot.auto.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+import frc.team7308.robot.Robot;
+
 public class DriveForTime extends Command {
     private double time;
     private double leftSpeed;
@@ -9,12 +12,11 @@ public class DriveForTime extends Command {
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
         this.time = time;
-    	requires(drivetrain);
     }
 
     protected void initialize() {
         setTimeout(time);
-        drivetrain.TankDrive(leftSpeed, rightSpeed);
+        Robot.drivetrain.TankDrive(leftSpeed, rightSpeed);
     }
 
     protected void execute() {
@@ -25,10 +27,10 @@ public class DriveForTime extends Command {
     }
 
     protected void end() {
-        drivetrain.TankDrive(0, 0);
+        Robot.drivetrain.TankDrive(0, 0);
     }
 
     protected void interrupted() {
-        drivetrain.TankDrive(0, 0);
+        Robot.drivetrain.TankDrive(0, 0);
     }
 }
