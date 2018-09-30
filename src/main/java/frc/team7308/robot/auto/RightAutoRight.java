@@ -9,13 +9,13 @@ import frc.team7308.robot.auto.commands.MoveLiftToHeight;
 import frc.team7308.robot.auto.commands.SetSliderPosition;
 import frc.team7308.robot.auto.commands.ThrowBox;
 
-public class LeftAutoLeft extends CommandGroup {
-    public LeftAutoLeft() {
-		System.out.println("Left Auto: Left");
+public class RightAutoRight extends CommandGroup {
+    public RightAutoRight() {
+		System.out.println("Left Auto: Right");
     	addSequential(new Sleep(2));
 		addParallel(new SetSliderPosition(true));
     	addSequential(new DriveForTime(2.7, -0.5, 0.5));
-    	addSequential(new DriveForTime(1, 0.0, 0.6));
+    	addSequential(new DriveForTime(1, -0.6, 0.0));
 		addSequential(new DriveForTime(0.5, -0.5, 0.5));
 		addSequential(new ThrowBox());
 		addSequential(new DriveForTime(1.5, 0.5, -0.5));

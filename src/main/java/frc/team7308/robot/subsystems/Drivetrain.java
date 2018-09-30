@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
 
 import frc.team7308.robot.ControlLoop;
-import frc.team7308.robot.DriverStation;
+import frc.team7308.robot.Input;
 import frc.team7308.robot.subsystems.Subsystem;
 import frc.team7308.robot.subsystems.Lift;
 
@@ -14,7 +14,7 @@ public class Drivetrain extends Subsystem {
     private double leftSpeed;
     private double rightSpeed;
 
-    private DriverStation driverStation;
+    private Input driverStation;
 
     private static double mQuickStopAccumulator;
     private static final double kStickDeadband = 0.02;
@@ -49,7 +49,7 @@ public class Drivetrain extends Subsystem {
         this.left = new SpeedControllerGroup(frontLeft, backLeft);
         this.right = new SpeedControllerGroup(frontRight, backRight);
 
-        this.driverStation = DriverStation.getInstance();
+        this.driverStation = Input.getInstance();
     }
 
     public void ArcadeDrive(double movement, double rotation) {

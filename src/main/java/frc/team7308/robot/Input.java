@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.team7308.robot.ControlLoop;
 
-public class DriverStation {
-    private static DriverStation m_instance = null;
+public class Input {
+    private static Input m_instance = null;
 
-    public static DriverStation getInstance() {
+    public static Input getInstance() {
         if (m_instance == null) {
-            m_instance = new DriverStation();
+            m_instance = new Input();
         }
         return m_instance;
     }
@@ -28,7 +28,7 @@ public class DriverStation {
     private JoystickButton openClaw;
     private JoystickButton autoAlign;
 
-    public DriverStation() {
+    public Input() {
         this.throttleStick = new Joystick(1);
         this.rotationWheel = new Joystick(0);
         this.quickTurnTrigger = new JoystickButton(this.rotationWheel, 1);

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.team7308.robot.ControlLoop;
-import frc.team7308.robot.DriverStation;
+import frc.team7308.robot.Input;
 import frc.team7308.robot.subsystems.Subsystem;
 
 public class Lift extends Subsystem {
@@ -15,7 +15,7 @@ public class Lift extends Subsystem {
     public static Encoder m_encoder;
     private DigitalInput zeroSensor;
 
-    private DriverStation driverStation;
+    private Input driverStation;
 
     private double kP = 0.05;
     private double kI = 0.05;
@@ -77,7 +77,7 @@ public class Lift extends Subsystem {
 
         zeroed = false;
 
-        this.driverStation = DriverStation.getInstance();
+        this.driverStation = Input.getInstance();
     }
 
     // Normalized coordinates

@@ -3,7 +3,7 @@ package frc.team7308.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.team7308.robot.ControlLoop;
-import frc.team7308.robot.DriverStation;
+import frc.team7308.robot.Input;
 import frc.team7308.robot.subsystems.Subsystem;
 import frc.team7308.robot.subsystems.Lift;
 
@@ -16,7 +16,7 @@ public class Claw extends Subsystem{
     private boolean m_clawOpen;
     private boolean m_ejectorOut;
 
-    private DriverStation driverStation;
+    private Input driverStation;
 
     private boolean throwing;
     private double throwingTime;
@@ -87,7 +87,7 @@ public class Claw extends Subsystem{
         m_clawActuator = new DoubleSolenoid(4, 5);
         m_ejectorOut = false;
 
-        this.driverStation = DriverStation.getInstance();
+        this.driverStation = Input.getInstance();
     }
 
     public void actuateEjector(boolean ejectorOut) {

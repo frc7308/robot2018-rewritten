@@ -15,9 +15,11 @@ public class SetSliderPosition extends Command {
     protected void initialize() {
         setTimeout(0.5);
         if (sliderOut) {
+            Robot.claw.m_sliderOut = true;
             Robot.claw.m_clawSlider.set(DoubleSolenoid.Value.kForward);
         }
         else {
+            Robot.claw.m_sliderOut = false;
             Robot.claw.m_clawSlider.set(DoubleSolenoid.Value.kReverse);
         }
     }
