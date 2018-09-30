@@ -1,12 +1,14 @@
 package frc.team7308.robot.auto.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import frc.team7308.robot.Robot;
 
 public class SetSliderPosition extends Command {
     private boolean sliderOut;
 
-    public DriveForTime(boolean sliderOut) {
+    public SetSliderPosition(boolean sliderOut) {
         this.sliderOut = sliderOut;
     }
 
@@ -28,11 +30,8 @@ public class SetSliderPosition extends Command {
     }
 
     protected void end() {
-        m_sliderOut = true;
-        Robot.claw.m_clawSlider.set(DoubleSolenoid.Value.kForward);
     }
 
     protected void interrupted() {
-        Robot.claw.m_clawSlider.set(DoubleSolenoid.Value.kForward);
     }
 }

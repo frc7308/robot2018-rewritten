@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team7308.robot.subsystems.Drivetrain;
 import frc.team7308.robot.subsystems.Lift;
@@ -52,7 +53,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         loopMaster.setGameState("Autonomous");
-        System.out.println("ayaya");
         LeftAutoLeft.start();
     }
 

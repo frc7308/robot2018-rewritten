@@ -113,7 +113,6 @@ public class Drivetrain extends Subsystem {
             double speedLimit = (550.0 / Lift.m_encoder.get()) + 0.1;
             leftMotorOutput = clamp(leftMotorOutput, -speedLimit, speedLimit);
             rightMotorOutput = clamp(rightMotorOutput, -speedLimit, speedLimit);
-            System.out.println(speedLimit);
         }
 
         // Normalize the wheel speeds

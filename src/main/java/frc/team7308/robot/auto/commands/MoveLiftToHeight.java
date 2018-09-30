@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team7308.robot.Robot;
 
 public class MoveLiftToHeight extends Command {
-    private int height;
+    private double height;
 
-    public MoveLiftToHeight(int height) {
+    public MoveLiftToHeight(double height) {
         this.height = height;
     }
 

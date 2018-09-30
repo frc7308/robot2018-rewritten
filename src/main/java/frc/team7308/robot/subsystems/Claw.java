@@ -8,9 +8,9 @@ import frc.team7308.robot.subsystems.Subsystem;
 import frc.team7308.robot.subsystems.Lift;
 
 public class Claw extends Subsystem{
-    private DoubleSolenoid m_boxEjector;
-    private DoubleSolenoid m_clawSlider;
-    private DoubleSolenoid m_clawActuator;
+    public DoubleSolenoid m_boxEjector;
+    public DoubleSolenoid m_clawSlider;
+    public DoubleSolenoid m_clawActuator;
 
     public static boolean m_sliderOut;
     private boolean m_clawOpen;
@@ -29,52 +29,54 @@ public class Claw extends Subsystem{
 
         @Override
         public void loopPeriodic() {
-            if (driverStation.getClawSliderOut()) {
-                m_sliderOut = true;
-            } else if (driverStation.getClawSliderIn() && Lift.m_encoder.get() > 200) {
-                m_sliderOut = false;
-            }
+            if (gameState.equals("Teleop")) {
+                if (driverStation.getClawSliderOut()) {
+                    m_sliderOut = true;
+                } else if (driverStation.getClawSliderIn() && Lift.m_encoder.get() > 200) {
+                    m_sliderOut = false;
+                }
 
-            if (driverStation.getOpenClaw() && m_sliderOut) {
-                m_clawOpen = true;
-            } else {
-                m_clawOpen = false;
-            }
+                if (driverStation.getOpenClaw() && m_sliderOut) {
+                    m_clawOpen = true;
+                } else {
+                    m_clawOpen = false;
+                }
 
-            if (driverStation.getEjectorTrigger()) {
-                m_ejectorOut = true;
-            } else {
-                m_ejectorOut = false;
-            }
+                if (driverStation.getEjectorTrigger()) {
+                    m_ejectorOut = true;
+                } else {
+                    m_ejectorOut = false;
+                }
 
-            if (driverStation.getThrowBox()) {
-                throwing = true;
-                throwingTime = 0;
-            }
-            if (throwingTime > 100) {
-                throwing = false;
-            } else {
-                throwingTime += deltaTime;
-            }
-            if (throwing && m_sliderOut) {
-                m_clawOpen = true;
-                m_ejectorOut = true;
-            }
-           
-            if (m_sliderOut) {
-                m_clawSlider.set(DoubleSolenoid.Value.kForward);
-            } else {
-                m_clawSlider.set(DoubleSolenoid.Value.kReverse);
-            }
-            if (m_clawOpen) {
-                m_clawActuator.set(DoubleSolenoid.Value.kForward);
-            } else {
-                m_clawActuator.set(DoubleSolenoid.Value.kReverse);
-            }
-            if (m_ejectorOut) {
-                m_boxEjector.set(DoubleSolenoid.Value.kForward);
-            } else {
-                m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+                if (driverStation.getThrowBox()) {
+                    throwing = true;
+                    throwingTime = 0;
+                }
+                if (throwingTime > 100) {
+                    throwing = false;
+                } else {
+                    throwingTime += deltaTime;
+                }
+                if (throwing && m_sliderOut) {
+                    m_clawOpen = true;
+                    m_ejectorOut = true;
+                }
+            
+                if (m_sliderOut) {
+                    m_clawSlider.set(DoubleSolenoid.Value.kForward);
+                } else {
+                    m_clawSlider.set(DoubleSolenoid.Value.kReverse);
+                }
+                if (m_clawOpen) {
+                    m_clawActuator.set(DoubleSolenoid.Value.kForward);
+                } else {
+                    m_clawActuator.set(DoubleSolenoid.Value.kReverse);
+                }
+                if (m_ejectorOut) {
+                    m_boxEjector.set(DoubleSolenoid.Value.kForward);
+                } else {
+                    m_boxEjector.set(DoubleSolenoid.Value.kReverse);
+                }
             }
         }
     };

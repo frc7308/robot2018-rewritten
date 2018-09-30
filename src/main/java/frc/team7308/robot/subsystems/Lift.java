@@ -35,6 +35,11 @@ public class Lift extends Subsystem {
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
+            if (!zeroed && !zeroSensor.get()) {
+                zeroed = true;
+                m_encoder.reset();
+                System.out.println("zeroed");
+            }
             if (gameState.equals("Autonomous")) {
                 double error = goal_height - m_encoder.get();
                 if (Math.abs(error) < kAcceptableError) {
@@ -44,6 +49,7 @@ public class Lift extends Subsystem {
                 }
                 double derivativeGain = (error - prev_err) / deltaTime;
                 m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
+                m_lift.set(m_liftSpeed);
             } else {
                 double throttle = driverStation.getLiftThrottle() * -1;
                 if (m_encoder.get() < -600 && zeroed) {
@@ -56,10 +62,6 @@ public class Lift extends Subsystem {
                     throttle = clamp(throttle, 0.0, 1.0);
                 }
                 m_lift.set(throttle);
-                if (!zeroSensor.get()) {
-                    zeroed = true;
-                    m_encoder.reset();
-                }
             }
         }
     };
