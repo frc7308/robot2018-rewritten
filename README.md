@@ -1,18 +1,18 @@
 # robot2018-rewritten
 
-Our 2018 Robot code rewritten in Java using better practices and implementation.
+Our 2018 Robot code rewritten in Java using better practices and implementation, with some added features here and there.
 
 ## Code Features
 
 ### Finished:
 
-- Custom Control Loops
-- Auto Powercube Pickup
-- Curvurature Drive
+- Complete re-write of old code
+- Custom control loop system
+- Switch to curvurature drive
+- PID on the lift
+- Command-based auto
+- Middle auto routines
 
 ### In the works:
 
-- PID on all Subsystems
-- Motion Profiling
-- 2+ Cube Auto
-- Localization
+- Comments on everything
