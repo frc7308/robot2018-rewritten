@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
         this.autoChooser.addObject("Right", "Right");
         this.autoChooser.addObject("Straight Left", "StraightLeft");
         this.autoChooser.addObject("Straight Right", "StraightRight");
+        this.autoChooser.addObject("Straight No Zero", "StraightNoZero");
         SmartDashboard.putData("Autonomous", this.autoChooser);
 
         this.LeftAutoLeft = new LeftAutoLeft();
@@ -128,6 +129,9 @@ public class Robot extends IterativeRobot {
                     StraightAutoNoZero.start();
                 }
             }
+        }
+        else if (selectedAuto == "StraightNoZero") {
+            StraightAutoNoZero.start();
         }
     }
 
