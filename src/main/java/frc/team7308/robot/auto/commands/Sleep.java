@@ -2,6 +2,7 @@ package frc.team7308.robot.auto.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+// Sleeps the auto routine for a specified amount of time. t depends on the specified time.
 public class Sleep extends Command {
     private double time;
 

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team7308.robot.ControlLoop;
 import frc.team7308.robot.Input;
@@ -51,18 +52,21 @@ public class Lift extends Subsystem {
                 m_liftSpeed = kP * error + kI * integralGain + kD * derivativeGain;
                 m_lift.set(m_liftSpeed);
             } else {
+                double encoder = m_encoder.get();
                 double throttle = driverStation.getLiftThrottle() * -1;
-                if (m_encoder.get() < -600 && zeroed) {
+                if (encoder < -600 && zeroed) {
                     throttle = clamp(throttle, 0.0, 1.0);
                 }
-                if (m_encoder.get() > 3500 && zeroed) {
+                if (encoder > 3500 && zeroed) {
                     throttle = clamp(throttle, -1.0, 0.0);
                 }
-                if (m_encoder.get() <= 200 && zeroed && !Claw.m_sliderOut) {
+                if (encoder <= 200 && zeroed && !Claw.m_sliderOut) {
                     throttle = clamp(throttle, 0.0, 1.0);
                 }
                 m_lift.set(throttle);
             }
+            SmartDashboard.putNumber("Encoder", m_encoder.get());
+            SmartDashboard.putBoolean("Zeroed", zeroed);
         }
     };
 
@@ -75,7 +79,7 @@ public class Lift extends Subsystem {
         this.m_encoder = new Encoder(0, 1);
         this.zeroSensor = new DigitalInput(3);
 
-        zeroed = false;
+        this.zeroed = false;
 
         this.driverStation = Input.getInstance();
     }

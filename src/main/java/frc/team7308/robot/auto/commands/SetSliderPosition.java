@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.team7308.robot.Robot;
 
+// Sets the claw slider to the specified position where true = out and false = in. t = 0.5s.
 public class SetSliderPosition extends Command {
     private boolean sliderOut;
 

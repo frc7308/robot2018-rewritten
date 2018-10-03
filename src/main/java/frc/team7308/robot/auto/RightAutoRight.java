@@ -9,6 +9,8 @@ import frc.team7308.robot.auto.commands.MoveLiftToHeight;
 import frc.team7308.robot.auto.commands.SetSliderPosition;
 import frc.team7308.robot.auto.commands.ThrowBox;
 
+// Auto Routine: Right Auto: Right
+// Moves forwards across the auto line, turns left, throws a box, backs up, and zeroes the robot. Used for the right position.
 public class RightAutoRight extends CommandGroup {
     public RightAutoRight() {
 		System.out.println("Left Auto: Right");

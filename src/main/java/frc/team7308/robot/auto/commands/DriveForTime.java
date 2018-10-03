@@ -3,6 +3,7 @@ package frc.team7308.robot.auto.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team7308.robot.Robot;
 
+// Drives the robot for a specified amount of time using tank drive. t depends on the specified time.
 public class DriveForTime extends Command {
     private double time;
     private double leftSpeed;

@@ -3,6 +3,8 @@ package frc.team7308.robot.auto.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team7308.robot.Robot;
 
+// Moves the lift to a position using normalized coordinates where 0 = the zero position
+// and 1.0 is the highest possible location. Lowest position is -0.1666 repeating. t depends on goal height.
 public class MoveLiftToHeight extends Command {
     private double height;
 

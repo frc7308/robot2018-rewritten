@@ -62,6 +62,7 @@ public class Drivetrain extends Subsystem {
         this.rightSpeed = rightSpeed;
     }
 
+    // Wheel Drive aka Curvature Drive adapted from 254's 2015 drive code
     public void WheelDrive(double throttle, double rotation, boolean quickTurn) {
         double xSpeed = applyDeadzone(throttle, kStickDeadband);
         double zRotation = applyDeadzone(rotation, kWheelDeadband);
@@ -92,7 +93,6 @@ public class Drivetrain extends Subsystem {
         double leftMotorOutput = xSpeed + angularPower;
         double rightMotorOutput = xSpeed - angularPower;
 
-        // If rotation is overpowered, reduce both outputs to within acceptable range
         if (overPower) {
             if (leftMotorOutput > 1.0) {
                 rightMotorOutput -= leftMotorOutput - 1.0;

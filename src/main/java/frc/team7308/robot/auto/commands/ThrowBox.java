@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.team7308.robot.Robot;
 
+// Throws a power cube by opening the claw and extending the pusher piston. t = 1s.
 public class ThrowBox extends Command {
 
     public ThrowBox() {

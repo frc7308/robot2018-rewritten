@@ -58,7 +58,7 @@ public class Input {
     }
 
     public boolean getOpenClaw() {
-        return openClaw.get() || throttleStick.getTrigger();
+        return openClaw.get();
     }
 
     public boolean getClawSliderIn() {
@@ -71,6 +71,10 @@ public class Input {
 
     public boolean getThrowBox() {
         return throwBox.get();
+    }
+
+    public boolean getOpenClawDriver() {
+        return throttleStick.getTrigger();
     }
 
     public boolean autoAlign() {

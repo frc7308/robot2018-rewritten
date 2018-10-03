@@ -36,7 +36,7 @@ public class Claw extends Subsystem{
                     m_sliderOut = false;
                 }
 
-                if (driverStation.getOpenClaw() && m_sliderOut) {
+                if ((driverStation.getOpenClaw() || (driverStation.getOpenClawDriver() && Lift.m_encoder.get() <= 0)) && m_sliderOut) {
                     m_clawOpen = true;
                 } else {
                     m_clawOpen = false;
@@ -48,14 +48,14 @@ public class Claw extends Subsystem{
                     m_ejectorOut = false;
                 }
 
-                if (driverStation.getThrowBox()) {
-                    throwing = true;
-                    throwingTime = 0;
-                }
                 if (throwingTime > 100) {
                     throwing = false;
                 } else {
                     throwingTime += deltaTime;
+                }
+                if (driverStation.getThrowBox() || (driverStation.getOpenClawDriver() && Lift.m_encoder.get() > 0)) {
+                    throwing = true;
+                    throwingTime = 0;
                 }
                 if (throwing && m_sliderOut) {
                     m_clawOpen = true;
@@ -81,7 +81,7 @@ public class Claw extends Subsystem{
         }
     };
 
-    public Claw(){
+    public Claw() {
         m_boxEjector = new DoubleSolenoid(0, 1);
         m_clawSlider = new DoubleSolenoid(2, 3);
         m_clawActuator = new DoubleSolenoid(4, 5);
