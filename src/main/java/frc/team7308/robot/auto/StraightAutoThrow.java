@@ -15,9 +15,8 @@ import frc.team7308.robot.auto.commands.ThrowBox;
 public class StraightAutoThrow extends CommandGroup {
     public StraightAutoThrow() {
 		System.out.println("Straight Auto: Throw");
-		addSequential(new SetSliderPosition(true));
-		addSequential(new Sleep(1));
     	addSequential(new DriveForTime(2.7, -0.5, 0.5));
+		addParallel(new SetSliderPosition(true));
 		addSequential(new ThrowBox());
     }
 }

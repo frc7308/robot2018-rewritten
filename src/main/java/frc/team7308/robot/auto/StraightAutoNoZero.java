@@ -16,8 +16,6 @@ public class StraightAutoNoZero extends CommandGroup {
     public StraightAutoNoZero() {
 		System.out.println("Straight Auto: No Zero");
 		addSequential(new SetSliderPosition(true));
-		addSequential(new Sleep(1));
     	addSequential(new DriveForTime(2.7, -0.5, 0.5));
-		addSequential(new ThrowBox());
     }
 }

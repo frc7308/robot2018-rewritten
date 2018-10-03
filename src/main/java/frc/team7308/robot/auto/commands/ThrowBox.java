@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.team7308.robot.Robot;
 
-// Throws a power cube by opening the claw and extending the pusher piston. t = 1s.
+// Throws a power cube by opening the claw and extending the pusher piston. t = 0.5s.
 public class ThrowBox extends Command {
 
     public ThrowBox() {
     }
 
     protected void initialize() {
-        setTimeout(1);
+        setTimeout(0.5);
         Robot.claw.m_clawActuator.set(DoubleSolenoid.Value.kForward);
         Robot.claw.m_boxEjector.set(DoubleSolenoid.Value.kForward);
     }

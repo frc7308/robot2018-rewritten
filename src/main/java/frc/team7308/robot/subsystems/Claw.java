@@ -30,12 +30,16 @@ public class Claw extends Subsystem{
         @Override
         public void loopPeriodic() {
             if (gameState.equals("Teleop")) {
+                // Slide the claw in and out.
                 if (driverStation.getClawSliderOut()) {
                     m_sliderOut = true;
+                // Cannot slide claw in if encoder val is less than 200 or it would intersect with lift support beams.
                 } else if (driverStation.getClawSliderIn() && Lift.m_encoder.get() > 200) {
                     m_sliderOut = false;
                 }
 
+                // Open claw if manipulator presses their open claw button or if the driver presses
+                // their open claw button and the lift height is below 0
                 if ((driverStation.getOpenClaw() || (driverStation.getOpenClawDriver() && Lift.m_encoder.get() <= 0)) && m_sliderOut) {
                     m_clawOpen = true;
                 } else {
