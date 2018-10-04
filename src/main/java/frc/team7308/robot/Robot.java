@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
         camera.setResolution(640, 480);
         camera.setFPS(10);
 
-        System.out.println("\n\n--- Robot started ---\n\n");
+        System.out.println("\n\n--- Running FRC 7308 2018 Robot Code ---\n\n");
     }
 
 
@@ -88,9 +88,10 @@ public class Robot extends IterativeRobot {
         loopMaster.setGameState("Autonomous");
         SmartDashboard.putString("Mode", "Autonomous");
 
-        String selectedAuto = (String) autoChooser.getSelected();
+        String selectedAuto = (String) autoChooser.getSelected(); // 
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
+        // Run autos based on selection
         if (selectedAuto == "Straight") {
             StraightAuto.start();
         }

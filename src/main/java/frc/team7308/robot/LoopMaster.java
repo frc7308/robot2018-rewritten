@@ -32,11 +32,11 @@ public class LoopMaster {
             public void run() {
                 double currTime = System.nanoTime() / 1000000.0;
                 double deltaTime = currTime - prevTime;
+                prevTime = currTime;
                 for (ControlLoop loop : LoopMaster.this.loopList) {
                     loop.loopPeriodic();
                     loop.deltaTime = deltaTime;
                 }
-                prevTime = currTime;
             }
         }
 
