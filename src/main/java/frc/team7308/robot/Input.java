@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.team7308.robot.ControlLoop;
 
+// Maps driver station inputs to functions to increase readability and consistency in code.
 public class Input {
     private static Input m_instance = null;
 
@@ -77,6 +78,7 @@ public class Input {
         return throttleStick.getTrigger();
     }
 
+    // Not used due to Jetson power issues.
     public boolean autoAlign() {
         return autoAlign.get();
     }

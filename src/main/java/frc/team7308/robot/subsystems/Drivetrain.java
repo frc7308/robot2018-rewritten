@@ -16,6 +16,7 @@ public class Drivetrain extends Subsystem {
 
     private Input driverStation;
 
+    // Configuration values for wheel (curvature) drive.
     private static double mQuickStopAccumulator;
     private static final double kStickDeadband = 0.02;
     private static final double kWheelDeadband = 0.02;
@@ -32,6 +33,7 @@ public class Drivetrain extends Subsystem {
     public final ControlLoop controlLoop = new ControlLoop() {
         @Override
         public void loopPeriodic() {
+            // Drive under operator control during teleop.
             if (gameState.equals("Teleop")) {
                 WheelDrive(driverStation.getThrottle(), driverStation.getRotation(), driverStation.getQuickTurn());
             }
@@ -41,28 +43,32 @@ public class Drivetrain extends Subsystem {
     };
 
     public Drivetrain() {
+        // Initialize drivetrain sparks.
         Spark frontLeft = new Spark(0);
         Spark backLeft = new Spark(1);
         Spark frontRight = new Spark(2);
         Spark backRight = new Spark(3);
 
+        // Group the sparks into sides (left & right) as both motors on each side are connected via a gearbox.
         this.left = new SpeedControllerGroup(frontLeft, backLeft);
         this.right = new SpeedControllerGroup(frontRight, backRight);
 
         this.driverStation = Input.getInstance();
     }
 
+    // Classic arcade drive
     public void ArcadeDrive(double movement, double rotation) {
         this.leftSpeed = rotation + movement;
         this.rightSpeed = rotation - movement;
     }
 
+    // Classic tank drive
     public void TankDrive(double leftSpeed, double rightSpeed) {
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
     }
 
-    // Wheel Drive aka Curvature Drive adapted from 254's 2015 drive code
+    // Wheel Drive aka Curvature Drive adapted from 254's 2015/2016 drive code.
     public void WheelDrive(double throttle, double rotation, boolean quickTurn) {
         double xSpeed = applyDeadzone(throttle, kStickDeadband);
         double zRotation = applyDeadzone(rotation, kWheelDeadband);

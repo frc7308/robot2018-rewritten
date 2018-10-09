@@ -41,10 +41,12 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         this.driverStation = Input.getInstance();
 
+        // Initialize subsystems
         this.drivetrain = new Drivetrain();
         this.lift = new Lift();
         this.claw = new Claw();
 
+        // Initialize autonomous routines
         this.autoChooser = new SendableChooser();
         this.autoChooser.addDefault("Straight", "Straight");
         this.autoChooser.addObject("Left", "Left");
@@ -59,19 +61,23 @@ public class Robot extends IterativeRobot {
         this.StraightAutoThrow = new StraightAutoThrow();
         this.StraightAutoNoZero = new StraightAutoNoZero();
 
+        // Initialize loops
         this.loopMaster = new LoopMaster();
         loopMaster.addLoop(drivetrain.controlLoop);
         loopMaster.addLoop(lift.controlLoop);
         loopMaster.addLoop(claw.controlLoop);
         loopMaster.start();
 
+        // Start the pneumatic compressor
         this.compressor = new Compressor();
         compressor.start();
 
+        // Create camera feed for drivers
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(640, 480);
         camera.setFPS(10);
 
+        // Leave a nice message for debugging in a long console
         System.out.println("\n\n--- Robot started ---\n\n");
     }
 
@@ -86,6 +92,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         loopMaster.setGameState("Autonomous");
         SmartDashboard.putString("Mode", "Autonomous");
+
+        // Run the appropriate auto based on game condition and driver station selection.
 
         String selectedAuto = (String) autoChooser.getSelected();
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -133,6 +141,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousPeriodic() {
+        // Run autonomous routines
         Scheduler.getInstance().run();
     }
 

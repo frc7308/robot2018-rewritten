@@ -1,5 +1,6 @@
 package frc.team7308.robot.util;
 
+// Represents a 2 dimensional vector. Not used in final code but kept in for use while prototyping swerve drive.
 public class Vector2D {
     public float x;
     public float y;
