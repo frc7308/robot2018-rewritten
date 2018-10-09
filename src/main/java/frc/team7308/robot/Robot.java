@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
         this.autoChooser.addObject("Right", "Right");
         this.autoChooser.addObject("Straight Left", "StraightLeft");
         this.autoChooser.addObject("Straight Right", "StraightRight");
+        this.autoChooser.addObject("Straight No Zero", "StraightNoZero");
         SmartDashboard.putData("Autonomous", this.autoChooser);
 
         this.LeftAutoLeft = new LeftAutoLeft();
@@ -78,7 +79,7 @@ public class Robot extends IterativeRobot {
         camera.setFPS(10);
 
         // Leave a nice message for debugging in a long console
-        System.out.println("\n\n--- Robot started ---\n\n");
+        System.out.println("\n\n--- Running FRC 7308 2018 Robot Code ---\n\n");
     }
 
 
@@ -98,6 +99,7 @@ public class Robot extends IterativeRobot {
         String selectedAuto = (String) autoChooser.getSelected();
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
+        // Run autos based on selection
         if (selectedAuto == "Straight") {
             StraightAuto.start();
         }
@@ -136,6 +138,9 @@ public class Robot extends IterativeRobot {
                     StraightAutoNoZero.start();
                 }
             }
+        }
+        else if (selectedAuto == "StraightNoZero") {
+            StraightAutoNoZero.start();
         }
     }
 

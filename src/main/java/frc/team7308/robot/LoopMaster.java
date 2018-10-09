@@ -37,12 +37,12 @@ public class LoopMaster {
             public void run() {
                 double currTime = System.nanoTime() / 1000000.0; // Get the current timestamp in milliseconds.
                 double deltaTime = currTime - prevTime; // Calculate deltatime.
+                prevTime = currTime; // Set prevTime.
                 // Run all of the loops and set their deltaTime variables.
                 for (ControlLoop loop : LoopMaster.this.loopList) {
                     loop.loopPeriodic();
                     loop.deltaTime = deltaTime;
                 }
-                prevTime = currTime; // Recalculate prevTime.
             }
         }
 

@@ -11,12 +11,13 @@ import frc.team7308.robot.auto.commands.ThrowBox;
 
 // Auto Routine: Straight Throw
 // Moves forwards to touch the switch wall and throws a box. Used for the middle positions.
-// Note: DOES NOT ZERO THE ROBOT!
+// DOES NOT ZERO THE ROBOT!
 public class StraightAutoThrow extends CommandGroup {
     public StraightAutoThrow() {
-		System.out.println("Straight Auto: Throw");
-    	addSequential(new DriveForTime(2.7, -0.5, 0.5));
-		addParallel(new SetSliderPosition(true));
-		addSequential(new ThrowBox());
+        System.out.println("Straight Auto: Throw");
+        addSequential(new DriveForTime(2.7, -0.5, 0.5));
+        addParallel(new SetSliderPosition(true));
+		addParallel(new MoveLiftToHeight(0.25));
+        addSequential(new ThrowBox());
     }
 }

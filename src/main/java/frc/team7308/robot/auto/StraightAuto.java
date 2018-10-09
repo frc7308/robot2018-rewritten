@@ -13,9 +13,9 @@ import frc.team7308.robot.auto.commands.ThrowBox;
 // Moves forwards across the auto line and zeroes the robot. Used for the side positions.
 public class StraightAuto extends CommandGroup {
     public StraightAuto() {
-		System.out.println("Straight Auto");
-		addSequential(new SetSliderPosition(true));
-    	addSequential(new DriveForTime(2.7, -0.5, 0.5));
-		addParallel(new MoveLiftToHeight(-0.1));
+        System.out.println("Straight Auto");
+        addSequential(new SetSliderPosition(true));
+        addSequential(new DriveForTime(2.7, -0.5, 0.5));
+        addParallel(new MoveLiftToHeight(-0.1));
     }
 }
