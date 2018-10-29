@@ -62,7 +62,7 @@ public class Drivetrain extends Subsystem {
         this.rightSpeed = rotation - movement;
     }
 
-    // Classic tank drive
+    // Classic tank drive :)
     public void TankDrive(double leftSpeed, double rightSpeed) {
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
